@@ -11,7 +11,7 @@ Danielle Miller, Rasmus Nielsen, Adi Stern
 ## Getting started:
 A jupyter notebook for running the code in available [here](RunContextAnalysis.ipynb) with two optional modes:
 - simulate
-- real data infference
+- real data inference
 
 Input frequency file can be either a csv file or a tab delimited file (.freq):
 *Note* that the simulations result have an additional line :`#moran model results`
