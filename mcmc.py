@@ -157,12 +157,12 @@ def featureSelectionPairs(X,y_,initNum,features,featureIndices=[],stepNum=10000)
             print res.loc['betas__0'],res.loc['betas__1']
             if res.loc['betas__0']['hpd_2.5']*res.loc['betas__0']['hpd_97.5']>0.7: #if they are both more than 0 or both less than 0
                 sigFeatures.append(featureIndices[i])
-               print "{} is a sigFeature at mean {}".format(features[featureIndices[i]],res.loc['betas__0']['mean'])
+                print "{} is a sigFeature at mean {}".format(features[featureIndices[i]],res.loc['betas__0']['mean'])
             else:
-               print "{} is a  not a sigFeature at mean {}".format(features[featureIndices[i]],res.loc['betas__0']['mean'])
+                print "{} is a  not a sigFeature at mean {}".format(features[featureIndices[i]],res.loc['betas__0']['mean'])
             if res.loc['betas__1']['hpd_2.5']*res.loc['betas__1']['hpd_97.5']>0.7:
                 sigFeatures.append(featureIndices[i+1]) 
-               print "{} is a sigFeature at mean {}".format(features[featureIndices[i+1]],res.loc['betas__1']['mean'])
+                print "{} is a sigFeature at mean {}".format(features[featureIndices[i+1]],res.loc['betas__1']['mean'])
             else:
                 print "{} is not a sigFeature at mean {}".format(features[featureIndices[i+1]],res.loc['betas__1']['mean'])
     return sigFeatures

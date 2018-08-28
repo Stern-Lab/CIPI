@@ -225,7 +225,7 @@ class EvolustionSimulations(object):
         # change % neutral
         if self.non_neutral > 0:
             s_dist = np.random.normal(0,0.0005, self.n)
-            s_dist = [-1*s for s in s_dist if i > 0 else s]
+            s_dist = [-1*s if i > 0 else s for s in s_dist]
             sample_size = int(self.non_neutral*len(selection))
             print 'NON_NEUTRAL_SELECTION : '
             print self.non_neutral
