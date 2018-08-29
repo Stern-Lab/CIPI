@@ -61,6 +61,7 @@ Python 2.7 with the following packages installed:
 * theano
 * matplotlib
 * seaborn
+* tqdm
 
 
 
