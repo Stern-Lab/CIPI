@@ -34,7 +34,7 @@ class featureExtraction(object):
         try:
             data=pd.read_table(self.freqs,sep='\s+',skiprows=1)
         except:
-            data=pd.reed_csv(self.freqs)
+            data=pd.read_csv(self.freqs)
         data=data[data['Ref']!='-']
         data=data.set_index([range(1,len(data.index)+1)])
         return data
