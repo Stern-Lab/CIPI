@@ -13,7 +13,7 @@ A jupyter notebook for running the code in available [here](RunContextAnalysis.i
 - simulate
 - real data inference
 
-Input frequency file can be either a csv file or a tab delimited file (.freq):
+Input frequency file can be either a csv file or a tab delimited file (.freq): <br />
 *Note* that the simulations result have an additional line :`#moran model results`
 ```
 #moran model results
@@ -30,7 +30,7 @@ Pos    Base    Freq    Ref    Read_count    Rank    Prob
 
 Generating frequency files from raw NGS data (fastq files) can be done by our AccuNGS pipeline<br />
 "AccuNGS: detecting ultra-rare variants in viruses from clinical samples." (Gelbart, M., et al. 2018).<br />
-code available [here](https://github.com/SternLabTAU/AccuNGS)
+code available [here](https://github.com/SternLabTAU/AccuNGS).
 ## 
 
 ## Outputs
@@ -53,8 +53,10 @@ The script creates a folder named `resultSummary` with two types of files:
  
  Here we can see that the motif `P4__G` is significanct as `gammaMean = 1`.
  
-Also, a gamma and beta posterior plots will be saved. For only presenting figures go to `GammaPriorTest.py` and under `outputAnalysis` set `plot=True` 
+Also, a gamma and beta posterior plots will be saved. For only presenting figures go to `GammaPriorTest.py` and under `outputAnalysis` set `plot=True` .<br />
 
+Running times might differ as a factor of genome length (up to an hour for 7k bases).<br />
+For multiple simulations we recommand running a distributed script and not using the attached jupyter notebook.
 
 ### Requirements
 Python 2.7 with the following packages installed:
