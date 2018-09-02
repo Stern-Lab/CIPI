@@ -1,5 +1,5 @@
 # Context
-Detecting context dependent mutation rates from NGS data
+Detecting context dependent mutation rates from NGS data.
 We designed a statistical method that allows for detection and 
 evaluation of the effects of different motifs on mutation rates. 
 
