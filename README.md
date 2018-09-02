@@ -28,7 +28,7 @@ Pos    Base    Freq    Ref    Read_count    Rank    Prob
 2    T    0.0065    A    10000    2    1.0
 ```
 
-Generating frequency files from raw NGS data (fastq files) can be executed by our AccuNGS pipeline<br />
+Generating frequency files from raw NGS data (fastq files) can be done by our AccuNGS pipeline<br />
 "AccuNGS: detecting ultra-rare variants in viruses from clinical samples." (Gelbart, M., et al. 2018).<br />
 code available [here](https://github.com/SternLabTAU/AccuNGS)
 ## 
