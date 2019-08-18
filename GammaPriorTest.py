@@ -31,6 +31,11 @@ def uniformPrior(x,low,high):
         return 1./(high-low)
     else:
         return -float('inf')
+
+def randomUniform(low, high):
+    return np.random.uniform(low, high)
+
+
 def bernouliPrior(v,size,vector,reuseVals=None):
     v=np.ones(size)*v
     
@@ -145,6 +150,10 @@ def MCMC(X,y,initNum,iterations,start=None,sigmaBoundries=(0.5,3),varianceFactor
     burnin=int(iterations/10)
     #setting higher v for low complexity models
     #v=max(10**(-40*m),v)
+
+    # set prior kappa to be uniform over a pre-defined interval.
+    v = randomUniform(10**-200, 10**-2)
+
     #creating a dictionary of values for repeating computation
     if reuseDict:
         d={}
@@ -178,6 +187,7 @@ def MCMC(X,y,initNum,iterations,start=None,sigmaBoundries=(0.5,3),varianceFactor
     betaOld=beta0
     gammaOld=gamma0
     alphaOld=alpha0
+    kappaOld = v
 
     #calculating old ll
     betaGammaOld=betaOld*gammaOld
@@ -202,6 +212,11 @@ def MCMC(X,y,initNum,iterations,start=None,sigmaBoundries=(0.5,3),varianceFactor
         gammaNew[gammaIndexSwitch]=1-gammaOld[gammaIndexSwitch]
         betaNew=betaOld.copy()
         alphaNew=nr.normal(loc=alphaOld,scale=1)
+        if accept < 100:
+            kappaNew = np.abs(nr.normal(loc=kappaOld, scale=kappaOld))  # need to be positive, kappa is small
+        else:
+            last_100_accepted = acceptVector[i-100:i].sum()
+            kappaNew =  np.abs(nr.normal(loc=kappaOld, scale=min(10**-1,kappaOld*10**(2*last_100_accepted))))
         betaIndexSwitch=nr.choice(m)
         betaNew[betaIndexSwitch]=nr.normal(loc=betaOld[betaIndexSwitch],scale=1)
         
@@ -213,11 +228,11 @@ def MCMC(X,y,initNum,iterations,start=None,sigmaBoundries=(0.5,3),varianceFactor
         newLL=binomialLL(y,initNum,muNew,reuse=d)
         
         if determinantel:
-            PrGnew=LDPPPrior(X, v, m, gammaNew)#
-            PrGold=LDPPPrior(X, v, m, gammaOld)#, reuseVals=d
+            PrGnew = LDPPPrior(X, kappaNew, m, gammaNew)
+            PrGold = LDPPPrior(X, kappaOld, m, gammaOld)
         else:
-            PrGnew=bernouliPrior(v, m, gammaNew, reuseVals=d)
-            PrGold=bernouliPrior(v, m, gammaOld, reuseVals=d)
+            PrGnew = bernouliPrior(kappaNew, m, gammaNew, reuseVals=d)
+            PrGold = bernouliPrior(kappaOld, m, gammaOld, reuseVals=d)
 
         PrAnew=normalPrior(alphaNew, variance=1, mean=empiricalMean)
         PrAOld=normalPrior(alphaOld, variance=1, mean=empiricalMean)
@@ -238,6 +253,7 @@ def MCMC(X,y,initNum,iterations,start=None,sigmaBoundries=(0.5,3),varianceFactor
             gammaOld=gammaNew
             betaOld=betaNew
             alphaOld=alphaNew
+            kappaOld = kappaNew
             muOld=muNew
             oldLL=newLL
             accept+=1
@@ -424,7 +440,8 @@ def loadData(dataPath,mutType):
 def fullAnalysis(dataPath,mutationType):
     
     X,y,initNum,features,name,folder=loadData(dataPath, mutationType)
-    sigIndex=featureSelection(X,y,initNum,features)
-    sigFeatures,gammaMatrix,gammaMatrixBest,betaMatrix,betaMatrixBest,allChains,bestChainSum,logPostVector=multipleChainsAnalysis(X, y,initNum,1000000,1,sigIndices=sigIndex,features=features)#,corMatrix=cormatrix
+    # MCMC feature selection step. replaced by stronger shrinkage.
+    #sigIndex=featureSelection(X,y,initNum,features)
+    sigFeatures,gammaMatrix,gammaMatrixBest,betaMatrix,betaMatrixBest,allChains,bestChainSum,logPostVector=multipleChainsAnalysis(X, y,initNum,1000000,1,features=features)#,corMatrix=cormatrix
     outputAnalysis(name+"_"+mutationType, sigFeatures, gammaMatrix, gammaMatrixBest, betaMatrix, betaMatrixBest, allChains, bestChainSum, logPostVector, plot=False, folder=folder)
 
