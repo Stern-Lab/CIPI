@@ -4,7 +4,7 @@ We designed a statistical method that allows for detection and
 evaluation of the effects of different motifs on mutation rates. 
 
 ## Reference:
-"A Bayesian framework for inferring the influence of sequence context on single base modifications" ,Guy Ling,
+"CIPI: A Bayesian framework for inferring the influence of sequence context on point mutations" ,Guy Ling,
 Danielle Miller, Rasmus Nielsen, Adi Stern
 
 
