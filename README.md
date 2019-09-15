@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3408598.svg)](https://doi.org/10.5281/zenodo.3408598)
+
 # Context
 Detecting context dependent mutation rates from NGS data.<br />
 We designed a statistical method that allows for detection and 
