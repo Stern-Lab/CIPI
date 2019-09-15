@@ -1,4 +1,4 @@
-# Context
+# CIPI: Context-based Inference of Point-mutation Influence
 Detecting context dependent mutation rates from NGS data.<br />
 We designed a statistical method that allows for detection and 
 evaluation of the effects of different motifs on mutation rates. 
