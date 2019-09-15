@@ -1,9 +1,12 @@
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3408598.svg)](https://doi.org/10.5281/zenodo.3408598)
-
 # Context
 Detecting context dependent mutation rates from NGS data.<br />
 We designed a statistical method that allows for detection and 
 evaluation of the effects of different motifs on mutation rates. 
+
+#
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3408598.svg)](https://doi.org/10.5281/zenodo.3408598)
+
 
 ## Reference:
 "CIPI: A Bayesian framework for inferring the influence of sequence context on point mutations" ,Guy Ling,
